@@ -2,8 +2,8 @@ package com.foodwaste.platform.controller;
 
 import com.foodwaste.platform.config.AppProperties;
 import com.foodwaste.platform.exception.ApiException;
-import com.foodwaste.platform.model.UserEntity;
 import com.foodwaste.platform.model.SignupOtpEntity;
+import com.foodwaste.platform.model.UserEntity;
 import com.foodwaste.platform.repository.SignupOtpRepository;
 import com.foodwaste.platform.repository.UserRepository;
 import com.foodwaste.platform.security.CurrentUser;
@@ -11,13 +11,10 @@ import com.foodwaste.platform.service.JwtService;
 import com.foodwaste.platform.service.MailService;
 import com.foodwaste.platform.service.PasswordService;
 import com.foodwaste.platform.util.ValidationUtils;
-import java.security.SecureRandom;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
-import org.springframework.mail.MailException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +32,6 @@ public class AuthController {
     private final JwtService jwtService;
     private final MailService mailService;
     private final AppProperties properties;
-    private final SecureRandom random = new SecureRandom();
 
     public AuthController(
         UserRepository userRepository,
@@ -53,56 +49,11 @@ public class AuthController {
         this.properties = properties;
     }
 
-    @PostMapping("/request-signup-otp")
-    public Map<String, Object> requestSignupOtp(@RequestBody Map<String, Object> body) {
+    @PostMapping("/signup")
+    public Map<String, Object> signup(@RequestBody Map<String, Object> body) {
         String email = ValidationUtils.requireEmail(body.get("email"));
         if (userRepository.findByEmail(email) != null) {
             throw new ApiException(409, "Email already registered");
-        }
-
-        String otpCode = String.valueOf(100000 + random.nextInt(900000));
-        signupOtpRepository.save(email, otpCode, Instant.now().plus(properties.getOtpExpiryMinutes(), ChronoUnit.MINUTES));
-        try {
-            mailService.sendOtp(email, otpCode, properties.getOtpExpiryMinutes());
-            return Map.of("message", "OTP generated successfully", "expiresInMinutes", properties.getOtpExpiryMinutes());
-        } catch (MailException ex) {
-            if (!properties.isDevOtpMode()) {
-                throw ex;
-            }
-
-            Map<String, Object> response = new LinkedHashMap<>();
-            response.put("message", "OTP generated in development mode");
-            response.put("expiresInMinutes", properties.getOtpExpiryMinutes());
-            response.put("otp", otpCode);
-            response.put("delivery", "dev-fallback");
-            return response;
-        }
-    }
-
-    @PostMapping("/signup-with-otp")
-    public Map<String, Object> signupWithOtp(@RequestBody Map<String, Object> body) {
-        String email = ValidationUtils.requireEmail(body.get("email"));
-        if (userRepository.findByEmail(email) != null) {
-            throw new ApiException(409, "Email already registered");
-        }
-
-        SignupOtpEntity otp = signupOtpRepository.findByEmail(email);
-        if (otp == null) {
-            throw new ApiException(400, "OTP not requested for this email");
-        }
-        if (otp.expiresAt.isBefore(Instant.now())) {
-            signupOtpRepository.deleteByEmail(email);
-            throw new ApiException(400, "OTP expired. Please request a new OTP");
-        }
-        if (otp.attempts >= 5) {
-            signupOtpRepository.deleteByEmail(email);
-            throw new ApiException(429, "Too many invalid OTP attempts. Request a new OTP");
-        }
-
-        String submittedOtp = ValidationUtils.requireOtp(body.get("otp"));
-        if (!submittedOtp.equals(otp.otpCode)) {
-            signupOtpRepository.incrementAttempts(email);
-            throw new ApiException(400, "Invalid OTP");
         }
 
         UserEntity user = new UserEntity();
@@ -118,17 +69,7 @@ public class AuthController {
         user.updatedAt = user.createdAt;
 
         UserEntity created = userRepository.create(user);
-        signupOtpRepository.deleteByEmail(email);
-
         return authResponse(created);
-    }
-
-    @PostMapping("/signup")
-    public Map<String, Object> signup(@RequestBody Map<String, Object> body) {
-        ValidationUtils.requireEmail(body.get("email"));
-        ValidationUtils.requirePassword(body.get("password"));
-        ValidationUtils.requireRole(body.get("role"));
-        throw new ApiException(400, "OTP verification required. Use /auth/request-signup-otp and /auth/signup-with-otp");
     }
 
     @PostMapping("/login")
