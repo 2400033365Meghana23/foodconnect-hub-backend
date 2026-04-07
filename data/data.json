@@ -1,0 +1,171 @@
+{
+  "meta" : {
+    "createdAt" : "2026-03-26T00:00:00Z",
+    "version" : 1
+  },
+  "users" : [ {
+    "id" : "467d62f1-7afa-4eeb-b17a-27106982cd01",
+    "email" : "smug353@gmail.com",
+    "passwordHash" : "$2a$10$IlaOgXh1apvZ4kIvy7wQ/uStgruSL2eVamDB65nTyCcnQOX5HCIA2",
+    "name" : "smug353",
+    "role" : "recipient",
+    "status" : "active",
+    "phone" : "",
+    "location" : "",
+    "createdAt" : "2026-04-05T10:07:13Z",
+    "updatedAt" : "2026-04-05T10:07:13Z"
+  }, {
+    "id" : "a2e238d0-9e75-4eb2-b428-b4a32acb1647",
+    "email" : "lankebhanu0@gmail.com",
+    "passwordHash" : "$2a$10$i7NKvfqQ155TKIe5G9CYTe24SsQXg8jFZuie3MmT4xVxwYyLwlQ5.",
+    "name" : "lankebhanu0",
+    "role" : "donor",
+    "status" : "active",
+    "phone" : "",
+    "location" : "",
+    "createdAt" : "2026-04-05T10:04:44Z",
+    "updatedAt" : "2026-04-05T10:04:44Z"
+  }, {
+    "id" : "3021afaa-fe9e-4250-8067-286b46a26802",
+    "email" : "admin@foodwaste.com",
+    "passwordHash" : "$2a$10$ijpWyMdYJ.YqffH.3fzFnuf99wjfIvLNDmgFoAq1.CF4cgW7v/AWy",
+    "name" : "Administrator",
+    "role" : "admin",
+    "status" : "active",
+    "phone" : "+1-800-FOOD-AID",
+    "location" : "New York, NY",
+    "createdAt" : "2026-03-30T05:39:23Z",
+    "updatedAt" : "2026-03-30T05:39:23Z"
+  }, {
+    "id" : "9616b5dc-e559-42af-92d0-92922abe986f",
+    "email" : "green@grocery.com",
+    "passwordHash" : "$2a$10$bm61kN7EXWKycMVrQjv3eu8dm/9Pt1EvRfUkNOKET9wImk4Saaou2",
+    "name" : "Green Grocery",
+    "role" : "donor",
+    "status" : "active",
+    "phone" : "+1-234-567-8901",
+    "location" : "New York, NY",
+    "createdAt" : "2026-03-30T05:39:23Z",
+    "updatedAt" : "2026-03-30T05:39:23Z"
+  }, {
+    "id" : "b193ac4b-63c7-486f-9364-52728b93dc73",
+    "email" : "data@insights.com",
+    "passwordHash" : "$2a$10$sMgTH6lTzZtbaieNOLC3G..RaFyVLsCCnpQOm9yPtT/a4ANEYMwDC",
+    "name" : "Data Insights Team",
+    "role" : "analyst",
+    "status" : "active",
+    "phone" : "+1-234-567-8907",
+    "location" : "San Antonio, TX",
+    "createdAt" : "2026-03-30T05:39:23Z",
+    "updatedAt" : "2026-03-30T05:39:23Z"
+  }, {
+    "id" : "c1ed5cbd-a1c7-4a84-a76b-baf5c0f68d81",
+    "email" : "contact@community.org",
+    "passwordHash" : "$2a$10$devPVxPVdsxrV3FlORcUNugqIAKIx96Dt0OpynJIzYWqT0PK5aT/m",
+    "name" : "Community Kitchen",
+    "role" : "recipient",
+    "status" : "active",
+    "phone" : "+1-234-567-8902",
+    "location" : "Los Angeles, CA",
+    "createdAt" : "2026-03-30T05:39:23Z",
+    "updatedAt" : "2026-03-30T05:39:23Z"
+  } ],
+  "donations" : [ {
+    "id" : "31dc2fb5-5651-4c25-871c-1e584e6e0b47",
+    "item" : "biryani",
+    "category" : "restaurant",
+    "quantity" : 10.0,
+    "unit" : "kg",
+    "status" : "requested",
+    "date" : "2026-04-05",
+    "expiryDate" : "",
+    "expiryHours" : 12,
+    "location" : "vijayawada",
+    "description" : "",
+    "recipientOrg" : "",
+    "donorId" : "a2e238d0-9e75-4eb2-b428-b4a32acb1647",
+    "assignedRequestId" : null,
+    "createdAt" : "2026-04-05T10:05:40.021613600Z",
+    "updatedAt" : "2026-04-05T10:07:21.642064500Z"
+  }, {
+    "id" : "seed-donation-1",
+    "item" : "Fresh Vegetables",
+    "category" : "vegetables",
+    "quantity" : 50.0,
+    "unit" : "kg",
+    "status" : "active",
+    "date" : "2026-02-20",
+    "expiryDate" : "2026-03-01",
+    "expiryHours" : null,
+    "location" : "Downtown",
+    "description" : "Fresh seasonal vegetables",
+    "recipientOrg" : "",
+    "donorId" : "seed-donor",
+    "assignedRequestId" : null,
+    "createdAt" : "2026-03-26T00:00:00Z",
+    "updatedAt" : "2026-03-26T00:00:00Z"
+  }, {
+    "id" : "seed-donation-2",
+    "item" : "Bread and Bakery",
+    "category" : "bakery",
+    "quantity" : 100.0,
+    "unit" : "items",
+    "status" : "completed",
+    "date" : "2026-02-19",
+    "expiryDate" : "2026-02-21",
+    "expiryHours" : null,
+    "location" : "North Side",
+    "description" : "Daily bakery surplus",
+    "recipientOrg" : "Food Bank Central",
+    "donorId" : "seed-donor",
+    "assignedRequestId" : null,
+    "createdAt" : "2026-03-26T00:00:00Z",
+    "updatedAt" : "2026-03-26T00:00:00Z"
+  } ],
+  "requests" : [ {
+    "id" : "5eb554eb-cea4-465e-9497-8030852d4421",
+    "donationId" : "31dc2fb5-5651-4c25-871c-1e584e6e0b47",
+    "recipientId" : "467d62f1-7afa-4eeb-b17a-27106982cd01",
+    "requestedBy" : "smug353",
+    "status" : "requested",
+    "requestDate" : "2026-04-05",
+    "estimatedDelivery" : "",
+    "deliveryDate" : "",
+    "createdAt" : "2026-04-05T10:07:21.636054300Z",
+    "updatedAt" : "2026-04-05T10:07:21.636054300Z"
+  } ],
+  "reports" : [ ],
+  "content" : {
+    "pages" : [ ],
+    "faqs" : [ ],
+    "announcements" : [ ]
+  },
+  "settings" : {
+    "general" : {
+      "platformName" : "Food Waste Platform",
+      "platformEmail" : "admin@foodwaste.com",
+      "platformPhone" : "+1-800-FOOD-AID",
+      "timezone" : "America/New_York",
+      "language" : "English"
+    },
+    "notifications" : {
+      "emailNotifications" : true,
+      "smsNotifications" : false,
+      "donationAlerts" : true,
+      "approvalAlerts" : true,
+      "weeklyReports" : true
+    },
+    "donations" : {
+      "minDonationQty" : "5",
+      "maxDonationQty" : "1000",
+      "expiryWarningDays" : "3",
+      "autoApproveEnabled" : false,
+      "requireVerification" : true
+    },
+    "security" : {
+      "sessionTimeoutMinutes" : 30,
+      "enforceStrongPasswords" : true,
+      "twoFactorEnabled" : false
+    }
+  }
+}
